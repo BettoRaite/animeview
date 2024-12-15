@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Game</title>
+    </head>
+    <body>
+        <a href="./catalog.html">go back</a>
+        <div>
+            <ul id="description"></ul>
+        </div>
+        <script type="module">
+            import { mockData } from "../src/mockData.js";
+            const description = document.getElementById("description");
+            const currentUrl = window.location.href;
+            const url = new URL(currentUrl);
+            const params = new URLSearchParams(url.search);
+            const id = params.get("id");
+            const item = mockData[id];
+            for (const key of Object.keys(item)) {
+                const li = document.createElement("li");
+                li.innerText = key + ": " + item[key];
+                description.appendChild(li);
+            }
+        </script>
+    </body>
+</html>

@@ -7,45 +7,101 @@
         <title>Vite App</title>
         <script type="module" src="/src/main.js"></script>
         <link rel="stylesheet" href="./styles/index.css" />
+        <link rel="stylesheet" href="./styles/main.css" />
     </head>
+
     <body>
-        <nav>
+        <nav class="nav">
             <img src="./images/rocket-sharp.png" alt="" />
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
+            <ul class="nav__links-list">
+                <li class="nav__link"><a href="#discount">Discount</a></li>
+                <li class="nav__link">
+                    <a href="./pages/booking.html">Order</a>
+                </li>
+                <li class="nav__link">
+                    <a href="./pages/profile.html">Profile</a>
+                </li>
+            </ul>
         </nav>
-        <div class="slider-layout">
+        <section class="slider-layout">
+            <h1>Popular games</h1>
             <div id="slider">
-                <section class="game-card">
+                <section class="game-slide">
                     <h1>The witness</h1>
                     <img src="./images/image2.jpg" alt="" />
                 </section>
-                <section class="game-card">
+                <section class="game-slide">
                     <h1>The witness</h1>
                     <img src="./images/image2.jpg" alt="" />
                 </section>
-                <section class="game-card">
+                <section class="game-slide">
                     <h1>The witness</h1>
                     <img src="./images/image2.jpg" alt="" />
                 </section>
             </div>
-            <button>next</button>
-            <button>prev</button>
-        </div>
-        <section>
+            <div class="slider-layout__btns">
+                <button id="slider-prev-btn">prev</button>
+                <button id="slider-next-btn">next</button>
+            </div>
+        </section>
+        <script type="module">
+            import { mockData } from "./src/mockData.js";
+            const slider = document.getElementById("slider");
+            const btnsNext = document.getElementById("slider-next-btn");
+            const btnsPrev = document.getElementById("slider-prev-btn");
+            const len = slider.children.length;
+            for (let i = 0; i < len; ++i) {
+                const s = slider.children[i];
+                const { gameTitle, url } = mockData[i];
+                s.children[0].textContent = gameTitle;
+                s.children[1].src = url;
+                s.children[1].alt = gameTitle;
+            }
+            let activeIndex = 0;
+            function setActive() {
+                for (let i = 0; i < len; ++i) {
+                    const s = slider.children[i];
+                    if (i === activeIndex) {
+                        s.className = "game-slide";
+                    }
+                    if (i < activeIndex) {
+                        s.className = "game-slide game-slide--unfocused-left";
+                    }
+                    if (i > activeIndex) {
+                        s.className = "game-slide game-slide--unfocused-right";
+                    }
+                }
+            }
+            setActive();
+            btnsNext.addEventListener("click", () => {
+                if (activeIndex < len - 1) {
+                    ++activeIndex;
+                    setActive();
+                }
+            });
+            btnsPrev.addEventListener("click", () => {
+                if (activeIndex > 0) {
+                    --activeIndex;
+                    setActive();
+                }
+            });
+        </script>
+        <section class="guarantee-layout">
             <center>
-                <h1>we will make sure the game is good.</h1>
+                <h1>We guarantee that</h1>
             </center>
+            <ul class="guarantees-list">
+                <li>Our game is going to be good</li>
+                <li>24/7 customer support</li>
+            </ul>
         </section>
         <form action="" class="search-form">
             <select name="genre" id="genre-select">
-                <option value="">--Please choose an option--</option>
                 <option value="Adventure">Adventure</option>
                 <option value="Monkey">Monkey</option>
                 <option value="Horror">Horror</option>
             </select>
-            <input type="text" />
+            <input type="text" placeholder="Title" />
             <select name="type" id="genre-select">
                 <option value="free">free</option>
                 <option value="paid">paid</option>
@@ -53,156 +109,165 @@
             <button>search</button>
         </form>
         <section class="new-arrivals">
-            <div id="slider">
+            <center>
+                <h1>New games</h1>
+            </center>
+            <div class="new-arrivals-layout" id="new-arrivals">
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Genre: Godlikemode</li>
-                                <li>Type: paid</li>
-                                <li>Price: 199$</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h1 class="new-game-title">The witness</h1>
+                    <img class="new-game-cover" />
+                    <ul class="new-game-description-list"></ul>
                 </section>
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Genre: Godlikemode</li>
-                                <li>Type: paid</li>
-                                <li>Price: 199$</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h1 class="new-game-title">The witness</h1>
+                    <img class="new-game-cover" />
+                    <ul class="new-game-description-list"></ul>
                 </section>
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Genre: Godlikemode</li>
-                                <li>Type: paid</li>
-                                <li>Price: 199$</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h1 class="new-game-title">The witness</h1>
+                    <img class="new-game-cover" />
+                    <ul class="new-game-description-list"></ul>
                 </section>
             </div>
             <center>
-                <a href="#">Go to catalog</a>
+                <a class="link" href="./pages/catalog.html">Go to catalog</a>
             </center>
         </section>
-        <!--  -->
-        <section class="discounts">
-            <div id="slider">
+
+        <script type="module">
+            import { mockData, keyTranslations } from "./src/mockData.js";
+
+            const newArrivalsList = document.getElementById("new-arrivals");
+
+            for (let i = 0; i < mockData.length - 1; ++i) {
+                const item = mockData[i];
+
+                const title =
+                    document.getElementsByClassName("new-game-title")[i];
+                title.textContent = item.gameTitle;
+
+                const cover =
+                    document.getElementsByClassName("new-game-cover")[i];
+                cover.src = item.url;
+                cover.alt = item.gameTitle;
+
+                const description = document.getElementsByClassName(
+                    "new-game-description-list",
+                )[i];
+                description.innerHTML = "";
+                const targetFields = new Set(["genre", "productType", "price"]);
+                for (const key of Object.keys(item)) {
+                    if (key === "url" || !targetFields.has(key)) continue;
+                    const li = document.createElement("li");
+                    li.textContent = `${keyTranslations.get(key)}: ${item[key]}`;
+                    description.appendChild(li);
+                }
+            }
+        </script>
+        <hr />
+        <section class="discounts" id="new-arrivals">
+            <center>
+                <h1>Discounts</h1>
+            </center>
+            <div class="discounts-layout">
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Genre: Godlikemode</li>
-                                <li>Type: paid</li>
-                                <li>Price: 199$</li>
-                                <li>Price with discount: 98.5$</li>
-                                <li>Discount: 50%</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="./pages/booking.html">Search</a>
+                    <h1 class="game-title">Cyberpunk 2077</h1>
+                    <img
+                        class="game-cover"
+                        src="./images/Cyberpunk-Edgerunners-S1-Poster-Lucy-en-1253181048.jpg"
+                    />
+                    <ul class="new-game-description-list">
+                        <li>genre: "Приключение"</li>
+                        <li>platform: "PC"</li>
+                        <li>activationRegion: "RU"</li>
+                        <li>productType: "Цифровая версия"</li>
+                        <li>
+                            price with discount:
+                            <span class="striked">1499</span> 750rub
+                        </li>
+                        <li>discount: 50%</li>
+                    </ul>
                 </section>
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Genre: Godlikemode</li>
-                                <li>Type: paid</li>
-                                <li>Price: 199$</li>
-                                <li>Price with discount: 98.5$</li>
-                                <li>Discount: 50%</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="./pages/booking.html">Search</a>
+                    <h1 class="game-title">Cyberpunk 2077</h1>
+                    <img
+                        class="game-cover"
+                        src="./images/Cyberpunk-Edgerunners-S1-Poster-Lucy-en-1253181048.jpg"
+                    />
+                    <ul class="new-game-description-list">
+                        <li>genre: "Приключение"</li>
+                        <li>platform: "PC"</li>
+                        <li>activationRegion: "RU"</li>
+                        <li>productType: "Цифровая версия"</li>
+                        <li>
+                            price with discount:
+                            <span class="striked">1499</span> 750rub
+                        </li>
+                        <li>discount: 50%</li>
+                    </ul>
                 </section>
                 <section class="game-card">
-                    <h1>The witness</h1>
-                    <div class="game-card__grid">
-                        <div class="game-image-minified">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <ul>
-                            <li>Genre: Godlikemode</li>
-                            <li>Type: paid</li>
-                            <li>Price: 199$</li>
-                            <li>Price with discount: 98.5$</li>
-                            <li>Discount: 50%</li>
-                        </ul>
-                    </div>
-                    <a href="./pages/booking.html">Search</a>
+                    <h1 class="game-title">Cyberpunk 2077</h1>
+                    <img
+                        class="game-cover"
+                        src="./images/Cyberpunk-Edgerunners-S1-Poster-Lucy-en-1253181048.jpg"
+                    />
+                    <ul class="new-game-description-list">
+                        <li>genre: "Приключение"</li>
+                        <li>platform: "PC"</li>
+                        <li>activationRegion: "RU"</li>
+                        <li>productType: "Цифровая версия"</li>
+                        <li>
+                            price with discount:
+                            <span class="striked">1499</span> 750rub
+                        </li>
+                        <li>discount: 50%</li>
+                    </ul>
                 </section>
             </div>
             <center>
-                <a href="#">Go to catalog</a>
+                <a class="link" href="./pages/catalog.html">Go to catalog</a>
             </center>
         </section>
-        <section class="news">
-            <div id="slider">
-                <section class="game-card">
-                    <div class="news-card__grid">
-                        <div class="news-img-wrapper">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <section>
-                            <h3>Me</h3>
-                            <p>this is such an interresing weathre today</p>
-                        </section>
-                        <button>read</button>
-                    </div>
-                </section>
-                <section class="game-card">
-                    <div class="news-card__grid">
-                        <div class="news-img-wrapper">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <section>
-                            <h3>Me</h3>
-                            <p>this is such an interresing weathre today</p>
-                        </section>
-                    </div>
-                </section>
-                <section class="game-card">
-                    <div class="news-card__grid">
-                        <div class="news-img-wrapper">
-                            <img src="./images/image2.jpg" alt="" />
-                        </div>
-                        <section>
-                            <h3>Me</h3>
-                            <p>this is such an interresing weathre today</p>
-                        </section>
-                    </div>
-                </section>
+        <hr />
+        <section>
+            <center>
+                <h1>News</h1>
+            </center>
+            <div class="news-layout">
+                <div class="news-card__grid">
+                    <img src="./images/image2.jpg" alt="" />
+                    <section>
+                        <h3>Me</h3>
+                        <p>Bro just got a new phone. Let's talk about it!</p>
+                    </section>
+                    <a href="#" class="link">
+                        <center>Read more</center>
+                    </a>
+                </div>
+                <div class="news-card__grid">
+                    <img src="./images/image2.jpg" alt="" />
+                    <section>
+                        <h3>Me</h3>
+                        <p>Bro just got a new phone. Let's talk about it!</p>
+                    </section>
+                    <a href="#" class="link">
+                        <center>Read more</center>
+                    </a>
+                </div>
+                <div class="news-card__grid">
+                    <img class="news-cover" src="./images/image2.jpg" alt="" />
+                    <section>
+                        <h3>Me</h3>
+                        <p>Bro just got a new phone. Let's talk about it!</p>
+                    </section>
+                    <a href="#" class="link">
+                        <center>Read more</center>
+                    </a>
+                </div>
             </div>
         </section>
-        <footer>
+        <footer class="footer">
             Телефон “8 (800) 111-11-11”
             <nav>
                 <ul class="footer__links">

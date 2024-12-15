@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <main class="cards-layout">
+            <div>
+                <form action="">
+                    <input type="text" maxlength="16" required />
+                    <input type="text" lang="en" placeholder="name" required />
+                    <label for="card-expiration-date">card-expiration</label>
+                    <input id="card-expiration-date" type="date" required />
+                    <button id="add-card" type="submit">Add card</button>
+                </form>
+            </div>
+            <div>
+                <p>Card number</p>
+                <p id="card-type"></p>
+                <p id="card-expiration-status"></p>
+                <button type="button">Delete card</button>
+            </div>
+            <button>Add card</button>
+        </main>
+    </body>
+</html>
